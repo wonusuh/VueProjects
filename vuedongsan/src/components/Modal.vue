@@ -1,12 +1,12 @@
 <template>
-    <div class="black-bg" v-if="modalStatus === true" v-on:click="modalStatus = false">
+    <div class="black-bg" v-if="modalStatus === true">
         <div class="white-bg">
-            <p>{{ onerooms[clickedOneroomId].id }}</p>
-            <h4>{{ onerooms[clickedOneroomId].title }}</h4>
-            <img :src=onerooms[clickedOneroomId].image alt="원룸 이미지입니다." />
+            <p>{{ oneroomsData[clickedOneroomId].id }}</p>
+            <h4>{{ oneroomsData[clickedOneroomId].title }}</h4>
+            <img :src=oneroomsData[clickedOneroomId].image alt="원룸 이미지입니다." />
             <Discount />
-            <p>{{ onerooms[clickedOneroomId].content }}</p>
-            <p>{{ onerooms[clickedOneroomId].price }}</p>
+            <p>{{ oneroomsData[clickedOneroomId].content }}</p>
+            <p>{{ oneroomsData[clickedOneroomId].price }}</p>
         </div>
     </div>
 </template>
@@ -14,10 +14,11 @@
 <script>
 export default {
     name: 'componentModal',
-    data() {
-        return {
-        }
-    }
+    props: {
+        oneroomsData: Array,
+        clickedOneroomId: Number,
+        modalStatus: Boolean
+    },
 }
 </script>
 
@@ -37,8 +38,7 @@ export default {
     padding: 20px;
 }
 
-.room-img {
-    width: 25%;
-    margin-top: 40px
+img {
+    width: 100%;
 }
 </style>
