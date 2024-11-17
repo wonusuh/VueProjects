@@ -11,7 +11,7 @@
   <MyDiscount v-bind="myObject" />
 
   <!-- 배열을 순회하여 모든 원룸들을 출력합니다. -->
-  <MyCard @openModal="모달창열렸니 = true; 누른거 = $event" v-bind:원룸="원룸들[i]" v-for="(원룸, i) in 원룸들" v-bind:key="원룸" />
+  <MyCard v-on:openModal="모달창열렸니 = true; 누른거 = $event" v-bind:원룸="원룸들[i]" v-for="(원룸, i) in 원룸들" v-bind:key="원룸" />
 </template>
 
 <script>
