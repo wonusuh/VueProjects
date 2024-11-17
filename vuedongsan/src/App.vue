@@ -1,37 +1,31 @@
 <template>
   <!-- 한 원룸의 상세정보 모달입니다. -->
-  <div class="black-bg" v-if="모달창열렸니 === true">
-    <div class="white-bg">
-      <p>{{ 원룸들[누른거].id }}</p>
-      <h4>{{ 원룸들[누른거].title }}</h4>
-      <img :src="원룸들[누른거].image" alt="원룸 이미지 입니다.">
-      <p>{{ 원룸들[누른거].content }}</p>
-      <p>{{ 원룸들[누른거].price }} 원</p>
-      <button v-on:click="모달창열렸니 = false;">닫기</button>
-    </div>
-  </div>
+  <MyModal @closeModal="모달창열렸니 = false;" v-bind:원룸들="원룸들" v-bind:누른거="누른거" v-bind:모달창열렸니="모달창열렸니" />
 
   <!-- 화면 최상단의 네비게이션 입니다. -->
   <div class="menu">
     <a v-for="(navi, i) in 메뉴들" :key="i">{{ navi }}</a>
   </div>
 
+  <!-- 홍보문구 입니다. -->
+  <MyDiscount v-bind="myObject" />
+
   <!-- 배열을 순회하여 모든 원룸들을 출력합니다. -->
-  <div v-for="(oneroom, i) in 원룸들" :key="i">
-    <img :src="oneroom.image" alt="원룸 이미지 입니다." class="room-img" />
-    <h4 v-on:click="모달창열렸니 = true; 누른거 = i;">{{ oneroom.title }}</h4>
-    <p>{{ oneroom.price }} 원</p>
-  </div>
+  <MyCard @openModal="모달창열렸니 = true; 누른거 = $event" v-bind:원룸="원룸들[i]" v-for="(원룸, i) in 원룸들" v-bind:key="원룸" />
 </template>
 
 <script>
 import data from './assets/oneroom.js';
+import MyDiscount from './components/MyDiscount.vue';
+import MyModal from './components/MyModal.vue';
+import MyCard from './components/MyCard.vue';
 
 export default {
   name: 'App',
   /** 데이터 저장공간을 React에서는 state 라고 부릅니다. */
   data() {
     return {
+      myObject: { name: 'kim', age: 20 },
       누른거: 0,
       원룸들: data,
       모달창열렸니: false,
@@ -41,6 +35,9 @@ export default {
   methods: {
   },
   components: {
+    MyDiscount: MyDiscount,
+    MyModal: MyModal,
+    MyCard: MyCard
   }
 }
 </script>
@@ -52,21 +49,6 @@ body {
 
 div {
   box-sizing: border-box;
-}
-
-.black-bg {
-  width: 100%;
-  height: 100%;
-  background: rgba(0, 0, 0, 0.5);
-  position: fixed;
-  padding: 20px;
-}
-
-.white-bg {
-  width: 100%;
-  background: white;
-  border-radius: 8px;
-  padding: 20px;
 }
 
 #app {
@@ -86,10 +68,5 @@ div {
 .menu a {
   color: white;
   padding: 10px;
-}
-
-.room-img {
-  width: 100%;
-  margin-top: 40px;
 }
 </style>
