@@ -14,9 +14,9 @@
 
 
   <!-- 정렬 버튼입니다. -->
-  <button @click="sortByPriceAsc();">가격순정렬</button>
-  <button @click="sortByPriceDsc();">가격역순정렬</button>
-  <button @click="resetSort();">정렬초기화</button>
+  <button @click="sortByPriceAsc">가격순정렬</button>
+  <button @click="sortByPriceDsc">가격역순정렬</button>
+  <button @click="resetSort">정렬초기화</button>
 
   <!-- 배열을 순회하여 모든 원룸들을 출력합니다. -->
   <MyCard v-on:openModal="모달창열렸니 = true; 누른거 = $event" v-bind:원룸="원룸들[i]" v-for="(원룸, i) in 원룸들" v-bind:key="원룸" />
