@@ -40,13 +40,13 @@
     </div>
   </nav>
 
-  <!-- 라우터 링크입니다. -->
+  <!-- 라우터 링크입니다. 라우팅을 통해 어디서 보여줄 지 정합니다. -->
   <router-link to="/">홈페이지</router-link>
-  <br>
   <router-link to="/list">리스트페이지</router-link>
 
-  <!-- 라우링을 통해 어디서 보여줄 지 정합니다. -->
-  <router-view v-bind:블로그글="블로그글"></router-view>
+  <div class="mt-4">
+    <router-view v-bind:블로그글="블로그글"></router-view>
+  </div>
 </template>
 
 <script>
