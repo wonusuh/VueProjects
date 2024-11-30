@@ -10,6 +10,7 @@
   </div>
 
   <VuestaContainer v-bind:vuestaData="vuestaData" />
+  <button v-on:click="more">더보기</button>
 
   <div class="footer">
     <ul class="footer-button-plus">
@@ -20,14 +21,29 @@
 </template>
 
 <script>
-import vuestaData from './assets/vuestaData';
 import VuestaContainer from './components/VuestaContainer.vue';
+import vuestaData from './assets/vuestaData';
+import axios from 'axios';
 
 export default {
   name: "App",
   data() {
     return {
-      vuestaData: vuestaData
+      vuestaData: vuestaData,
+      indexForGetRequest: 0,
+    }
+  },
+  methods: {
+    more() { // get 요청
+      axios.get(`https://codingapple1.github.io/vue/more${this.indexForGetRequest}.json`)
+        .then((response) => {
+          console.log(response.data);
+          this.vuestaData.push(response.data);
+          this.indexForGetRequest += 1;
+        })
+        .catch((err) => {
+          alert(err);
+        });
     }
   },
   components: {
