@@ -9,7 +9,7 @@
     <img src="./assets/logo.png" class="logo" alt="이미지" />
   </div>
 
-  <VuestaContainer v-bind:vuestaData="vuestaData" />
+  <VuestaContainer v-bind:vuestaData="vuestaData" v-bind:step="step"></VuestaContainer>
   <button v-on:click="more">더보기</button>
 
   <div class="footer">
@@ -31,10 +31,12 @@ export default {
     return {
       vuestaData: vuestaData,
       indexForGetRequest: 0,
+      step: 0 // 현재 보역지고있는 페이지
     }
   },
   methods: {
-    more() { // get 요청
+    /**  get 요청 */
+    more() {
       axios.get(`https://codingapple1.github.io/vue/more${this.indexForGetRequest}.json`)
         .then((response) => {
           console.log(response.data);
@@ -44,11 +46,16 @@ export default {
         .catch((err) => {
           alert(err);
         });
+    },
+
+    /** 페이지 변경 이벤트 */
+    onClickChangeStep() {
+
     }
   },
   components: {
     VuestaContainer: VuestaContainer
-  },
+  }
 };
 </script>
 
