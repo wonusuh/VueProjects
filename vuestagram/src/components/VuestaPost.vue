@@ -4,9 +4,10 @@
             <div class="profile" :style="{ backgroundImage: `url(${item.userImage})` }"></div>
             <span class="profile-name">{{ item.name }}</span>
         </div>
-        <div v-bind:class="`post-body ${item.filter}`" :style="{ backgroundImage: `url(${item.postImage})` }"></div>
+        <div v-bind:class="`post-body ${item.filter}`" :style="{ backgroundImage: `url(${item.postImage})` }"
+            v-on:click="$store.commit('like', item.liked);"></div>
         <div class="post-content">
-            <p>{{ item.likes }} Likes</p>
+            <p>{{ $store.state.liked }} Likes</p>
             <p><strong>{{ item.name }}</strong> {{ item.content }}</p>
             <p class="date">{{ item.date }}</p>
         </div>
