@@ -4,7 +4,7 @@
             <div class="profile" :style="{ backgroundImage: `url(${item.userImage})` }"></div>
             <span class="profile-name">{{ item.name }}</span>
         </div>
-        <div class="post-body" :style="{ backgroundImage: `url(${item.postImage})` }"></div>
+        <div v-bind:class="`post-body ${item.filter}`" :style="{ backgroundImage: `url(${item.postImage})` }"></div>
         <div class="post-content">
             <p>{{ item.likes }} Likes</p>
             <p><strong>{{ item.name }}</strong> {{ item.content }}</p>
@@ -65,5 +65,16 @@ export default {
     font-size: 11px;
     color: grey;
     margin-top: -8px;
+}
+
+.filter-item {
+    width: 100px;
+    height: 100px;
+    margin: 10px 10px 10px auto;
+    padding: 8px;
+    display: inline-block;
+    color: gold;
+    background-size: cover;
+    background-position: center;
 }
 </style>
