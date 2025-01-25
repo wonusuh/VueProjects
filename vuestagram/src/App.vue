@@ -11,7 +11,9 @@
   </div>
 
   <h4>안녕 {{ $store.state.name }}</h4>
-  <button v-on:click="$store.state.name = '박'">버튼</button>
+  <h4>age : {{ $store.state.age }}</h4>
+  <button v-on:click="$store.commit('changeName')">이름변경</button>
+  <button v-on:click="$store.commit('addAge', 10)">나이변경</button>
 
   <VuestaContainer v-bind:vuestaData="vuestaData" v-bind:step="step" v-bind:imgUrl="imgUrl"
     v-bind:selectedFilter="selectedFilter" v-on:textChanged="handleTextChanged"></VuestaContainer>
