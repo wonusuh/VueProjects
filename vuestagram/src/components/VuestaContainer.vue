@@ -21,11 +21,17 @@
             <textarea class="write-box" v-on:input="onTextAreaChanged">write!</textarea>
         </div>
     </div>
+
+    <!-- 마이 페이지 -->
+    <div v-if="step === 3">
+        <MyPage v-bind:one="1"></MyPage>
+    </div>
 </template>
 
 <script>
 import VuestaPost from './VuestaPost.vue';
 import FilterBox from './FilterBox.vue';
+import MyPage from './MyPage.vue';
 
 export default {
     name: "VuestaContainer",
@@ -39,7 +45,8 @@ export default {
     },
     components: {
         VuestaPost,
-        FilterBox: FilterBox
+        FilterBox: FilterBox,
+        MyPage: MyPage
     },
     props: {
         vuestaData: Array,
