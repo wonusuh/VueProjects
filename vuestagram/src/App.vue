@@ -45,7 +45,7 @@ export default {
     return {
       vuestaData: vuestaData,
       indexForGetRequest: 0,
-      step: 0, // 현재 보여지고있는 페이지의 인덱스
+      step: 3, // 현재 보여지고있는 페이지의 인덱스
       imgUrl: '', // 업로드한 이미지의 url
       postContent: '',
       selectedFilter: '',
