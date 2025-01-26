@@ -15,9 +15,15 @@
   <button v-on:click="$store.commit('changeName')">이름변경</button>
   <button v-on:click="$store.commit('addAge', 10)">나이변경</button>
 
+  <p> {{ $store.state.more }}</p>
+  <button v-on:click="$store.dispatch('getData')">actions더보기버튼</button>
+  <p>{{ now2 }} {{ test }} {{ name }} {{ age }} {{ likes }}</p>
+  <button v-on:click="test += 1">버튼</button>
+
   <VuestaContainer v-bind:vuestaData="vuestaData" v-bind:step="step" v-bind:imgUrl="imgUrl"
     v-bind:selectedFilter="selectedFilter" v-on:textChanged="handleTextChanged"></VuestaContainer>
   <button v-on:click="more">더보기</button>
+
 
   <div class="footer">
     <ul class="footer-button-plus">
@@ -31,6 +37,7 @@
 import VuestaContainer from './components/VuestaContainer.vue';
 import vuestaData from './assets/vuestaData';
 import axios from 'axios';
+import { mapMutations, mapState } from 'vuex';
 
 export default {
   name: "App",
@@ -41,8 +48,12 @@ export default {
       step: 0, // 현재 보여지고있는 페이지의 인덱스
       imgUrl: '', // 업로드한 이미지의 url
       postContent: '',
-      selectedFilter: ''
+      selectedFilter: '',
+      test: 0
     }
+  },
+  components: {
+    VuestaContainer: VuestaContainer,
   },
   mounted() {
     /** 필터 적용 */
@@ -51,7 +62,19 @@ export default {
       this.selectedFilter = _selectedFilter
     })
   },
+  computed: {
+    /** methods와 비교를 위한 함수 */
+    now2() { return new Date() },
+    name() {
+      return this.$store.state.name
+    },
+    ...mapState(['name', 'age', 'likes']),
+    ...mapState({ myName: 'name' })
+  },
   methods: {
+    ...mapMutations(['setMore', 'like']),
+    /** computed와 비교를 위한 함수 */
+    now() { return new Date() },
     /** get 요청 */
     more() {
       axios.get(`https://codingapple1.github.io/vue/more${this.indexForGetRequest}.json`)
@@ -102,9 +125,6 @@ export default {
     handleTextChanged(emittedValue) {
       this.postContent = emittedValue
     }
-  },
-  components: {
-    VuestaContainer: VuestaContainer,
   }
 };
 </script>
